@@ -12,4 +12,10 @@ describe('Number Schema', () => {
       'Invalid type, not a number'
     )
   })
+
+  it.only('should handle optional numbers', () => {
+    expect(z.number().optional().parse(undefined)).toBeUndefined()
+    expect(z.number().optional().parse(null)).toBeNull()
+    expect(z.number().optional().parse(123)).toBe(123)
+  })
 })

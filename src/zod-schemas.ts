@@ -34,6 +34,18 @@ const number = (): ZodNumber => ({
     if (typeof value !== 'number') throw new Error('Invalid type, not a number')
     return value
   },
+  optional: () => ({
+    type: 'number',
+    parse: (value: unknown): number | undefined | null => {
+      if (value === undefined || value === null) {
+        return value
+      }
+
+      if (typeof value !== 'number')
+        throw new Error('Invalid type, not a number')
+      return value
+    },
+  }),
 })
 
 const unknown = (): ZodUnknown => ({

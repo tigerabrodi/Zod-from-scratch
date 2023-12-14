@@ -22,6 +22,10 @@ export interface ZodString {
 export interface ZodNumber {
   type: 'number'
   parse(val: unknown): number
+  optional(): {
+    type: 'number'
+    parse(val: unknown): number | undefined | null
+  }
 }
 
 export interface ZodArray<Type extends ZodType> {
