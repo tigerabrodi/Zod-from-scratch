@@ -21,4 +21,17 @@ describe('Array Schema', () => {
       'Invalid type, not a number'
     )
   })
+
+  it('should handle nested arrays', () => {
+    const numArray = z.array(z.array(z.number()))
+    expect(
+      numArray.parse([
+        [1, 2],
+        [3, 4],
+      ])
+    ).toEqual([
+      [1, 2],
+      [3, 4],
+    ])
+  })
 })

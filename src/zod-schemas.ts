@@ -54,6 +54,7 @@ const object = <Type extends Record<string, ZodType>>(
     // value parses by the corresponding entry in `value`
     Object.entries(fields).forEach(([key, val]) => {
       if (!(key in recordValue)) throw new Error(`Missing field ${key}`)
+
       val.parse(recordValue[key])
     })
 
