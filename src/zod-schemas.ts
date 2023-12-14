@@ -1,3 +1,13 @@
+import type {
+  ZodArray,
+  InferZodObject,
+  ZodNumber,
+  ZodObject,
+  ZodString,
+  ZodType,
+  ZodUnknown,
+} from './zod-types'
+
 const string = (): ZodString => ({
   type: 'string',
   parse: (value: unknown) => {
@@ -5,6 +15,7 @@ const string = (): ZodString => ({
     return value
   },
 })
+
 const number = (): ZodNumber => ({
   type: 'number',
   parse: (value: unknown) => {
@@ -12,6 +23,7 @@ const number = (): ZodNumber => ({
     return value
   },
 })
+
 const unknown = (): ZodUnknown => ({
   type: 'unknown',
   parse: (value: unknown) => value,

@@ -1,38 +1,38 @@
-type ZodType =
+export type ZodType =
   | ZodUnknown
   | ZodString
   | ZodNumber
   | ZodArray<ZodType>
   | ZodObject<Record<string, ZodType>>
 
-interface ZodUnknown {
+export interface ZodUnknown {
   type: 'unknown'
   parse(val: unknown): unknown
 }
 
-interface ZodString {
+export interface ZodString {
   type: 'string'
   parse(val: unknown): string
 }
 
-interface ZodNumber {
+export interface ZodNumber {
   type: 'number'
   parse(val: unknown): number
 }
 
-interface ZodArray<Type extends ZodType> {
+export interface ZodArray<Type extends ZodType> {
   type: 'array'
   element: Type
   parse(val: unknown): Array<Infer<Type>>
 }
 
-interface ZodObject<Type extends Record<string, ZodType>> {
+export interface ZodObject<Type extends Record<string, ZodType>> {
   type: 'object'
   fields: Type
   parse(val: unknown): InferZodObject<ZodObject<Type>>
 }
 
-type Infer<Type extends ZodType> = Type extends ZodUnknown
+export type Infer<Type extends ZodType> = Type extends ZodUnknown
   ? unknown
   : Type extends ZodString
   ? string
@@ -44,7 +44,7 @@ type Infer<Type extends ZodType> = Type extends ZodUnknown
   ? InferZodObject<Type>
   : 'invalid type'
 
-type InferZodObject<T extends ZodObject<Record<string, ZodType>>> = {
+export type InferZodObject<T extends ZodObject<Record<string, ZodType>>> = {
   // keys of fields and their inferred types
   [Key in keyof T['fields']]: Infer<T['fields'][Key]>
 }
