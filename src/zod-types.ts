@@ -7,22 +7,29 @@ type ZodType =
 
 interface ZodUnknown {
   type: 'unknown'
+  parse(val: unknown): unknown
 }
+
 interface ZodString {
   type: 'string'
+  parse(val: unknown): string
 }
+
 interface ZodNumber {
   type: 'number'
+  parse(val: unknown): number
 }
 
 interface ZodArray<Type extends ZodType> {
   type: 'array'
   element: Type
+  parse(val: unknown): Array<Infer<Type>>
 }
 
-interface ZodObject<ObjType extends Record<string, ZodType>> {
+interface ZodObject<Type extends Record<string, ZodType>> {
   type: 'object'
-  fields: ObjType
+  fields: Type
+  parse(val: unknown): InferZodObject<ZodObject<Type>>
 }
 
 type Infer<Type extends ZodType> = Type extends ZodUnknown
