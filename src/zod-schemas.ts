@@ -14,6 +14,18 @@ const string = (): ZodString => ({
     if (typeof value !== 'string') throw new Error('Invalid type, not a string')
     return value
   },
+  optional: () => ({
+    type: 'string',
+    parse: (value: unknown): string | undefined | null => {
+      if (value === undefined || value === null) {
+        return value
+      }
+
+      if (typeof value !== 'string')
+        throw new Error('Invalid type, not a string')
+      return value
+    },
+  }),
 })
 
 const number = (): ZodNumber => ({

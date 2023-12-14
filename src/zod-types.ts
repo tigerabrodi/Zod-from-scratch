@@ -13,6 +13,10 @@ export interface ZodUnknown {
 export interface ZodString {
   type: 'string'
   parse(val: unknown): string
+  optional(): {
+    type: 'string'
+    parse(val: unknown): string | undefined | null
+  }
 }
 
 export interface ZodNumber {
