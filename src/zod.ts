@@ -15,28 +15,29 @@ interface ZodNumber {
   type: 'number'
 }
 
-interface ZodArray<T extends ZodType> {
+interface ZodArray<Type extends ZodType> {
   type: 'array'
-  element: T
+  element: Type
 }
 
-interface ZodObject<T extends Record<string, ZodType>> {
+interface ZodObject<ObjType extends Record<string, ZodType>> {
   type: 'object'
-  fields: T
+  fields: ObjType
 }
 
-type Infer<T extends ZodType> = T extends ZodUnknown
+type Infer<Type extends ZodType> = Type extends ZodUnknown
   ? unknown
-  : T extends ZodString
+  : Type extends ZodString
   ? string
-  : T extends ZodNumber
+  : Type extends ZodNumber
   ? number
-  : T extends ZodArray<infer E>
-  ? Array<Infer<E>>
-  : T extends ZodObject<Record<string, ZodType>> // <-- over here
-  ? InferZodObject<T>
+  : Type extends ZodArray<infer ElementType>
+  ? Array<Infer<ElementType>>
+  : Type extends ZodObject<Record<string, ZodType>>
+  ? InferZodObject<Type>
   : 'invalid type'
 
 type InferZodObject<T extends ZodObject<Record<string, ZodType>>> = {
+  // keys of fields and their inferred types
   [Key in keyof T['fields']]: Infer<T['fields'][Key]>
 }
