@@ -8,6 +8,6 @@ describe('String Schema', () => {
   })
 
   it('should throw an error for a non-string', () => {
-    expect(() => z.string().parse(123)).toThrow('Invalid type')
+    expect(() => z.string().parse(123)).toThrow('Invalid type, not a string')
   })
 })

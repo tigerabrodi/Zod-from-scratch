@@ -1,14 +1,14 @@
 const string = (): ZodString => ({
   type: 'string',
   parse: (value: unknown) => {
-    if (typeof value !== 'string') throw new Error('Invalid type')
+    if (typeof value !== 'string') throw new Error('Invalid type, not a string')
     return value
   },
 })
 const number = (): ZodNumber => ({
   type: 'number',
   parse: (value: unknown) => {
-    if (typeof value !== 'number') throw new Error('Invalid type')
+    if (typeof value !== 'number') throw new Error('Invalid type, not a number')
     return value
   },
 })
@@ -21,7 +21,7 @@ const array = <Type extends ZodType>(element: Type): ZodArray<Type> => ({
   type: 'array',
   element,
   parse: (value: unknown) => {
-    if (!Array.isArray(value)) throw new Error('Invalid type')
+    if (!Array.isArray(value)) throw new Error('Invalid type, not an array')
     value.forEach((v) => element.parse(v))
     return value
   },

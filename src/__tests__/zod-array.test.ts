@@ -10,6 +10,8 @@ describe('Array Schema', () => {
 
   it('should throw an error for a non-array', () => {
     const numArray = z.array(z.number())
-    expect(() => numArray.parse('not an array')).toThrow('Invalid type')
+    expect(() => numArray.parse('not an array')).toThrow(
+      'Invalid type, not an array'
+    )
   })
 })

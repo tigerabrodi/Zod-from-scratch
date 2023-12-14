@@ -8,6 +8,8 @@ describe('Number Schema', () => {
   })
 
   it('should throw an error for a non-number', () => {
-    expect(() => z.number().parse('hello')).toThrow('Invalid type')
+    expect(() => z.number().parse('hello')).toThrow(
+      'Invalid type, not a number'
+    )
   })
 })
