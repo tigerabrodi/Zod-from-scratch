@@ -50,9 +50,12 @@ const object = <Type extends Record<string, ZodType>>(
 
     const recordValue = value as Record<string, unknown>
 
-    // Check that each key in `this.fields` is present in the `value`, and its
+    // Check that each key in `fields` is present in the `value`, and its
     // value parses by the corresponding entry in `value`
-    Object.entries(fields).forEach(([key, val]) => val.parse(recordValue[key]))
+    Object.entries(fields).forEach(([key, val]) => {
+      if (!(key in recordValue)) throw new Error(`Missing field ${key}`)
+      val.parse(recordValue[key])
+    })
 
     return value as InferZodObject<ZodObject<Type>>
   },

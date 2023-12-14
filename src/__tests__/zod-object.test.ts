@@ -21,4 +21,15 @@ describe('Object Schema', () => {
     })
     expect(() => personSchema.parse('not an object')).toThrow('Not an object')
   })
+
+  it('should throw an error for a missing field', () => {
+    const personSchema = z.object({
+      name: z.string(),
+      age: z.number(),
+    })
+
+    expect(() => personSchema.parse({ name: 'Alice' })).toThrow(
+      'Missing field age'
+    )
+  })
 })
