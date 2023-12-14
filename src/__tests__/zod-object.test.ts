@@ -32,4 +32,39 @@ describe('Object Schema', () => {
       'Missing field age'
     )
   })
+
+  it('should handle nested objects', () => {
+    const personSchema = z.object({
+      name: z.string(),
+      age: z.number(),
+      address: z.object({
+        street: z.string(),
+        city: z.string(),
+        state: z.string(),
+        zip: z.number(),
+      }),
+    })
+
+    expect(
+      personSchema.parse({
+        name: 'Alice',
+        age: 30,
+        address: {
+          street: '123 Main St',
+          city: 'Anytown',
+          state: 'NY',
+          zip: 12345,
+        },
+      })
+    ).toEqual({
+      name: 'Alice',
+      age: 30,
+      address: {
+        street: '123 Main St',
+        city: 'Anytown',
+        state: 'NY',
+        zip: 12345,
+      },
+    })
+  })
 })
