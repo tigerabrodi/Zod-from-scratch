@@ -12,8 +12,8 @@ describe('String Schema', () => {
   })
 
   it.only('should handle optional strings', () => {
-    expect(z.string().optional().parse(undefined)).toBe(undefined)
-    expect(z.string().optional().parse(null)).toBe(null)
+    expect(z.string().optional().parse(undefined)).toBeUndefined()
+    expect(z.string().optional().parse(null)).toBeNull()
     expect(z.string().optional().parse('hello')).toBe('hello')
   })
 })
