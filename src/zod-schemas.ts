@@ -6,6 +6,7 @@ import type {
   ZodString,
   ZodType,
   ZodUnknown,
+  Infer,
 } from './zod-types'
 
 const string = (): ZodString => ({
@@ -61,6 +62,19 @@ const array = <Type extends ZodType>(element: Type): ZodArray<Type> => ({
     value.forEach((v) => element.parse(v))
     return value
   },
+  optional: () => ({
+    type: 'array',
+    element,
+    parse: (value: unknown): Array<Infer<Type>> | undefined | null => {
+      if (value === undefined || value === null) {
+        return value
+      }
+
+      if (!Array.isArray(value)) throw new Error('Invalid type, not an array')
+      value.forEach((v) => element.parse(v))
+      return value
+    },
+  }),
 })
 
 const object = <Type extends Record<string, ZodType>>(

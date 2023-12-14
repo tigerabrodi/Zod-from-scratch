@@ -32,6 +32,11 @@ export interface ZodArray<Type extends ZodType> {
   type: 'array'
   element: Type
   parse(val: unknown): Array<Infer<Type>>
+  optional(): {
+    type: 'array'
+    element: Type
+    parse(val: unknown): Array<Infer<Type>> | undefined | null
+  }
 }
 
 export interface ZodObject<Type extends Record<string, ZodType>> {

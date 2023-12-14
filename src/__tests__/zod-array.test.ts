@@ -34,4 +34,9 @@ describe('Array Schema', () => {
       [3, 4],
     ])
   })
+
+  it('should handle optional arrays', () => {
+    const numArray = z.array(z.number()).optional()
+    expect(numArray.parse(undefined)).toEqual(undefined)
+  })
 })
