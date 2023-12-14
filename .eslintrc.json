@@ -1,15 +1,21 @@
 {
   "root": true,
-  "extends": ["eslint:recommended"],
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:import/errors",
+    "plugin:import/warnings",
+    "plugin:import/typescript"
+  ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "project": ["./tsconfig.json"]
   },
+  "plugins": ["@typescript-eslint"],
   "rules": {
     "@typescript-eslint/consistent-type-imports": "error",
     "@typescript-eslint/no-redeclare": "error",
     "@typescript-eslint/no-floating-promises": "error",
-    "@typescript-eslint/consistent-type-definitions": ["error", "type"],
     "@typescript-eslint/naming-convention": [
       "error",
       {
@@ -28,7 +34,6 @@
         "checksSpreads": true
       }
     ],
-    "remix/node-server-imports": "error",
     "import/order": [
       "error",
       {
