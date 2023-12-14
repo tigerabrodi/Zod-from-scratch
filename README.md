@@ -2,7 +2,7 @@
 
 ## Todo
 
-[] Handle nested objects and arrays.
+[x] Handle nested objects and arrays.
 
 [] Optional and nullable types.
 
