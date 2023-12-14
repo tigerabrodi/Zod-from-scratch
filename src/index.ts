@@ -1,3 +1,0 @@
-const thisl = false
-
-export {}
