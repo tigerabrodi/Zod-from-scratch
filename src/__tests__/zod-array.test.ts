@@ -14,4 +14,11 @@ describe('Array Schema', () => {
       'Invalid type, not an array'
     )
   })
+
+  it('should throw an error for an array with invalid elements', () => {
+    const numArray = z.array(z.number())
+    expect(() => numArray.parse([1, '2', 3])).toThrow(
+      'Invalid type, not a number'
+    )
+  })
 })
