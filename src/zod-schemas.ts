@@ -33,6 +33,7 @@ const number = (): ZodNumber => ({
   parse: parseNumber,
   optional: () => ({
     type: 'number',
+    isOptional: true,
     parse: parseOptionalNumber,
   }),
 })

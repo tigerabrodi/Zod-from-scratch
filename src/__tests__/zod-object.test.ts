@@ -82,7 +82,7 @@ describe('Object Schema', () => {
   it('should handle optional fields', () => {
     const personSchema = z.object({
       name: z.string(),
-      // optionalAge: z.number().optional(),
+      optionalAge: z.number().optional(),
       optionalName: z.string().optional(),
       // optionalObject: z.object({
       //   optionalField: z.string().optional(),
