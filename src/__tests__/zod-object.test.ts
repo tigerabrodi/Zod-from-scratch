@@ -78,4 +78,19 @@ describe('Object Schema', () => {
 
     expect(personSchema.parse(undefined)).toBeUndefined()
   })
+
+  it.only('should handle optional fields', () => {
+    const personSchema = z.object({
+      name: z.string(),
+      age: z.number().optional(),
+    })
+
+    expect(
+      personSchema.parse({
+        name: 'Alice',
+      })
+    ).toEqual({
+      name: 'Alice',
+    })
+  })
 })
