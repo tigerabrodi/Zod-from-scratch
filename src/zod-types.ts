@@ -15,6 +15,7 @@ export interface ZodString {
   parse(val: unknown): string
   optional(): {
     type: 'string'
+    isOptional: true
     parse(val: unknown): string | undefined | null
   }
 }
