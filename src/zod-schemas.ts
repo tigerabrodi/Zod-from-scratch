@@ -86,18 +86,46 @@ const object = <Type extends Record<string, ZodType>>(
     if (typeof value !== 'object' || value == null)
       throw new Error('Not an object')
 
-    const recordValue = value as Record<string, unknown>
+    const objectValue = value as Record<string, unknown>
 
     // Check that each key in `fields` is present in the `value`, and its
     // value parses by the corresponding entry in `value`
     Object.entries(fields).forEach(([key, val]) => {
-      if (!(key in recordValue)) throw new Error(`Missing field ${key}`)
+      if (!(key in objectValue)) throw new Error(`Missing field ${key}`)
 
-      val.parse(recordValue[key])
+      val.parse(objectValue[key])
     })
 
     return value as InferZodObject<ZodObject<Type>>
   },
+  optional: () => ({
+    type: 'object',
+    fields,
+    parse: (
+      value: unknown
+    ): InferZodObject<ZodObject<Type>> | undefined | null => {
+      if (value === undefined || value === null) {
+        return value
+      }
+
+      if (typeof value !== 'object' || value == null)
+        throw new Error('Not an object')
+
+      const objectValue = value as Record<string, unknown>
+
+      // Check that each key in `fields` is present in the `value`, and its
+      // value parses by the corresponding entry in `value`
+      Object.entries(fields).forEach(([key, val]) => {
+        const isKeyInObject = key in objectValue
+
+        if (!isKeyInObject) throw new Error(`Missing field ${key}`)
+
+        val.parse(objectValue[key])
+      })
+
+      return value as InferZodObject<ZodObject<Type>>
+    },
+  }),
 })
 
 export const z = {
