@@ -12,7 +12,13 @@ export function parseObject<Type extends Record<string, ZodType>>(
   // Check that each key in `fields` is present in the `value`, and its
   // value parses by the corresponding entry in `value`
   Object.entries(fields).forEach(([key, val]) => {
-    if (!(key in objectValue)) throw new Error(`Missing field ${key}`)
+    const isKeyInObjectValue = key in objectValue
+
+    if (!isKeyInObjectValue && fields[key] && 'isOptional' in fields[key]) {
+      return
+    }
+
+    if (!isKeyInObjectValue) throw new Error(`Missing field ${key}`)
 
     val.parse(objectValue[key])
   })

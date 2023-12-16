@@ -4,6 +4,13 @@ export type ZodType =
   | ZodNumber
   | ZodArray<ZodType>
   | ZodObject<Record<string, ZodType>>
+  | ZodOptional<ZodType>
+
+export interface ZodOptional<Type extends ZodType> {
+  type: Type['type']
+  isOptional: true
+  parse(val: unknown): Infer<Type> | undefined | null
+}
 
 export interface ZodUnknown {
   type: 'unknown'
@@ -13,11 +20,7 @@ export interface ZodUnknown {
 export interface ZodString {
   type: 'string'
   parse(val: unknown): string
-  optional(): {
-    type: 'string'
-    isOptional: true
-    parse(val: unknown): string | undefined | null
-  }
+  optional(): Omit<ZodOptional<ZodString>, 'optional'>
 }
 
 export interface ZodNumber {
