@@ -9,25 +9,19 @@ import type {
   Infer,
 } from './zod-types'
 
-import { parseNumber, parseOptionalNumber } from './helpers'
+import {
+  parseNumber,
+  parseOptionalNumber,
+  parseOptionalString,
+  parseString,
+} from './helpers'
 
 const string = (): ZodString => ({
   type: 'string',
-  parse: (value: unknown) => {
-    if (typeof value !== 'string') throw new Error('Invalid type, not a string')
-    return value
-  },
+  parse: parseString,
   optional: () => ({
     type: 'string',
-    parse: (value: unknown): string | undefined | null => {
-      if (value === undefined || value === null) {
-        return value
-      }
-
-      if (typeof value !== 'string')
-        throw new Error('Invalid type, not a string')
-      return value
-    },
+    parse: parseOptionalString,
   }),
 })
 
