@@ -9,6 +9,8 @@ import type {
   Infer,
 } from './zod-types'
 
+import { parseNumber, parseOptionalNumber } from './helpers'
+
 const string = (): ZodString => ({
   type: 'string',
   parse: (value: unknown) => {
@@ -31,21 +33,10 @@ const string = (): ZodString => ({
 
 const number = (): ZodNumber => ({
   type: 'number',
-  parse: (value: unknown) => {
-    if (typeof value !== 'number') throw new Error('Invalid type, not a number')
-    return value
-  },
+  parse: parseNumber,
   optional: () => ({
     type: 'number',
-    parse: (value: unknown): number | undefined | null => {
-      if (value === undefined || value === null) {
-        return value
-      }
-
-      if (typeof value !== 'number')
-        throw new Error('Invalid type, not a number')
-      return value
-    },
+    parse: parseOptionalNumber,
   }),
 })
 
