@@ -6,11 +6,12 @@ import type {
   ZodString,
   ZodType,
   ZodUnknown,
-  Infer,
 } from './zod-types'
 
 import {
+  parseArray,
   parseNumber,
+  parseOptionalArray,
   parseOptionalNumber,
   parseOptionalString,
   parseString,
@@ -42,23 +43,11 @@ const unknown = (): ZodUnknown => ({
 const array = <Type extends ZodType>(element: Type): ZodArray<Type> => ({
   type: 'array',
   element,
-  parse: (value: unknown) => {
-    if (!Array.isArray(value)) throw new Error('Invalid type, not an array')
-    value.forEach((v) => element.parse(v))
-    return value
-  },
+  parse: (value: unknown) => parseArray(element, value),
   optional: () => ({
     type: 'array',
     element,
-    parse: (value: unknown): Array<Infer<Type>> | undefined | null => {
-      if (value === undefined || value === null) {
-        return value
-      }
-
-      if (!Array.isArray(value)) throw new Error('Invalid type, not an array')
-      value.forEach((v) => element.parse(v))
-      return value
-    },
+    parse: (value: unknown) => parseOptionalArray(element, value),
   }),
 })
 
