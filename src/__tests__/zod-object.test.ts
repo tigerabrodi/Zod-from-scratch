@@ -84,10 +84,7 @@ describe('Object Schema', () => {
       name: z.string(),
       optionalAge: z.number().optional(),
       optionalName: z.string().optional(),
-      // optionalObject: z.object({
-      //   optionalField: z.string().optional(),
-      // }),
-      // optionalArray: z.array(z.string()).optional(),
+      optionalArray: z.array(z.string()).optional(),
     })
 
     expect(

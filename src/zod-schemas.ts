@@ -50,6 +50,7 @@ const array = <Type extends ZodType>(element: Type): ZodArray<Type> => ({
   optional: () => ({
     type: 'array',
     element,
+    isOptional: true,
     parse: (value: unknown) => parseOptionalArray(element, value),
   }),
 })
