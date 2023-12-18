@@ -1,10 +1,6 @@
-import type { ZodNumber } from '../zod-types'
+import type { ZodNumber } from '../types'
 
-import {
-  parseNullableNumber,
-  parseNumber,
-  parseOptionalNumber,
-} from '../helpers'
+import { parseNullableNumber, parseNumber, parseOptionalNumber } from '../parse'
 
 export const number = (): ZodNumber => ({
   type: 'number',

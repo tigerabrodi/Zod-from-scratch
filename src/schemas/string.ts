@@ -1,10 +1,6 @@
-import type { ZodString } from '../zod-types'
+import type { ZodString } from '../types'
 
-import {
-  parseNullableString,
-  parseOptionalString,
-  parseString,
-} from '../helpers'
+import { parseNullableString, parseOptionalString, parseString } from '../parse'
 
 export const string = (): ZodString => ({
   type: 'string',

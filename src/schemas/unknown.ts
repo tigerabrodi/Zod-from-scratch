@@ -1,4 +1,4 @@
-import type { ZodUnknown } from '../zod-types'
+import type { ZodUnknown } from '../types'
 
 export const unknown = (): ZodUnknown => ({
   type: 'unknown',

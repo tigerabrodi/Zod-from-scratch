@@ -1,6 +1,6 @@
-import type { ZodArray, ZodType } from '../zod-types'
+import type { ZodArray, ZodType } from '../types'
 
-import { parseArray, parseNullableArray, parseOptionalArray } from '../helpers'
+import { parseArray, parseNullableArray, parseOptionalArray } from '../parse'
 
 export const array = <Type extends ZodType>(element: Type): ZodArray<Type> => ({
   type: 'array',

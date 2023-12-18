@@ -1,4 +1,4 @@
-import type { ZodType, InferElementType } from '../../zod-types'
+import type { InferElementType, ZodType } from '../types'
 
 export function parseArray<Type extends ZodType>(
   element: Type,

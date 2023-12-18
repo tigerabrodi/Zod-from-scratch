@@ -1,10 +1,6 @@
-import type { ZodObject, ZodType } from '../zod-types'
+import type { ZodObject, ZodType } from '../types'
 
-import {
-  parseNullableObject,
-  parseObject,
-  parseOptionalObject,
-} from '../helpers'
+import { parseNullableObject, parseObject, parseOptionalObject } from '../parse'
 
 export const object = <Type extends Record<string, ZodType>>(
   fields: Type

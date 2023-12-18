@@ -1,4 +1,4 @@
-import type { InferZodObject, ZodObject, ZodType } from '../../zod-types'
+import type { InferZodObject, ZodObject, ZodType } from '../types'
 
 export function parseObject<Type extends Record<string, ZodType>>(
   fields: Type,

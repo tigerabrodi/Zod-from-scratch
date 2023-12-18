@@ -1,2 +1,2 @@
-export * from './zod-schemas'
-export * from './zod-types'
+export * from './schemas'
+export * from './types'

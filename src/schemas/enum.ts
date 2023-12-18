@@ -1,6 +1,6 @@
-import type { ZodEnum } from '../zod-types'
+import type { ZodEnum } from '../types'
 
-import { parseEnum, parseNullableEnum, parseOptionalEnum } from '../helpers'
+import { parseEnum, parseNullableEnum, parseOptionalEnum } from '../parse'
 
 export const Enum = <Enum extends Array<string>>(
   values: Enum
