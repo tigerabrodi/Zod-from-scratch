@@ -21,6 +21,8 @@ export const parseUnion = <Options extends Array<ZodType>>(
   }
 
   throw new Error(
-    `Could not parse ${JSON.stringify(value)} as ${JSON.stringify(options)}`
+    `Could not parse ${JSON.stringify(value)} as ${JSON.stringify(
+      options.map((option) => option.type)
+    )}`
   )
 }
