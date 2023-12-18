@@ -116,6 +116,13 @@ const Enum = <Enum extends Array<string>>(values: Enum): ZodEnum<Enum> => ({
     values,
     parse: (value: unknown) => parseNullableEnum(values, value),
   }),
+  enum: values.reduce<{ [Key in Enum[number]]: Key }>(
+    (accumulator, currentValue) => {
+      accumulator[currentValue as Enum[number]] = currentValue
+      return accumulator
+    },
+    {} as { [Key in Enum[number]]: Key }
+  ),
 })
 
 export const z = {

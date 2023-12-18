@@ -21,11 +21,11 @@ export interface ZodNullable<Type extends ZodType> {
   isNullable: true
   parse(val: unknown): Infer<Type> | null
 }
-
 export interface ZodEnum<Enum extends Array<string>> {
   type: 'enum'
   values: Enum
   parse(val: unknown): Enum[number]
+  enum: { [Key in Enum[number]]: Key }
   optional(): Omit<ZodOptional<ZodEnum<Enum>>, OptionalOrNullable>
   nullable(): Omit<ZodNullable<ZodEnum<Enum>>, OptionalOrNullable>
 }

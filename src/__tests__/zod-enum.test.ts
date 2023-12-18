@@ -35,4 +35,13 @@ describe('Enum Schema', () => {
       'Expected a string, got undefined'
     )
   })
+
+  it('should return enum object with each enum', () => {
+    const enumSchema = z.enum(['a', 'b', 'c'])
+    expect(enumSchema.enum).toEqual({
+      a: 'a',
+      b: 'b',
+      c: 'c',
+    })
+  })
 })
