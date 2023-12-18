@@ -9,6 +9,7 @@ export type ZodType =
   | ZodOptional<ZodType>
   | ZodNullable<ZodType>
   | ZodEnum<Array<string>>
+  | ZodUnion<Array<ZodType>>
 
 type OptionalOrNullable = 'optional' | 'nullable'
 
@@ -65,4 +66,13 @@ export interface ZodObject<Type extends Record<string, ZodType>> {
   parse(val: unknown): InferZodObject<ZodObject<Type>>
   optional(): Omit<ZodOptional<ZodObject<Type>>, OptionalOrNullable>
   nullable(): Omit<ZodNullable<ZodObject<Type>>, OptionalOrNullable>
+}
+
+export interface ZodUnion<Union extends Array<ZodType>> {
+  type: 'union'
+  options: Union
+  parse(val: unknown): Infer<Union[number]>
+
+  // optional(): Omit<ZodOptional<ZodUnion<Union>>, OptionalOrNullable>
+  // nullable(): Omit<ZodNullable<ZodUnion<Union>>, OptionalOrNullable>
 }

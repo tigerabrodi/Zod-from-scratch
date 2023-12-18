@@ -7,6 +7,7 @@ import type {
   ZodEnum,
   ZodObject,
   ZodOptional,
+  ZodUnion,
 } from './zod-types'
 
 export type Infer<Type extends ZodType> = Type extends ZodUnknown
@@ -21,6 +22,8 @@ export type Infer<Type extends ZodType> = Type extends ZodUnknown
   ? EnumType[number]
   : Type extends ZodObject<infer ObjectType>
   ? InferObject<ObjectType>
+  : Type extends ZodUnion<infer Options>
+  ? Infer<Options[number]>
   : Type extends ZodOptional<infer WrappedType>
   ? Infer<WrappedType> | undefined | null
   : never

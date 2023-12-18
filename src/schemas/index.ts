@@ -3,6 +3,7 @@ import { Enum } from './enum'
 import { number } from './number'
 import { object } from './object'
 import { string } from './string'
+import { union } from './union'
 import { unknown } from './unknown'
 
 export const z = {
@@ -11,5 +12,6 @@ export const z = {
   unknown,
   array,
   object,
+  union,
   enum: Enum,
 } as const
