@@ -7,6 +7,8 @@ export type ZodType =
   | ZodOptional<ZodType>
   | ZodNullable<ZodType>
 
+type OptionalOrNullable = 'optional' | 'nullable'
+
 export interface ZodOptional<Type extends ZodType> {
   type: Type['type']
   isOptional: true
@@ -27,31 +29,31 @@ export interface ZodUnknown {
 export interface ZodString {
   type: 'string'
   parse(val: unknown): string
-  optional(): Omit<ZodOptional<ZodString>, 'optional'>
-  nullable(): Omit<ZodNullable<ZodString>, 'nullable'>
+  optional(): Omit<ZodOptional<ZodString>, OptionalOrNullable>
+  nullable(): Omit<ZodNullable<ZodString>, OptionalOrNullable>
 }
 
 export interface ZodNumber {
   type: 'number'
   parse(val: unknown): number
-  optional(): Omit<ZodOptional<ZodNumber>, 'optional'>
-  nullable(): Omit<ZodNullable<ZodNumber>, 'nullable'>
+  optional(): Omit<ZodOptional<ZodNumber>, OptionalOrNullable>
+  nullable(): Omit<ZodNullable<ZodNumber>, OptionalOrNullable>
 }
 
 export interface ZodArray<Type extends ZodType> {
   type: 'array'
   element: Type
-  parse(val: unknown): Array<Infer<Type>>
-  optional(): Omit<ZodOptional<ZodArray<Type>>, 'optional'>
-  nullable(): Omit<ZodNullable<ZodArray<Type>>, 'nullable'>
+  parse(val: unknown): Array<InferElementType<Type>>
+  optional(): Omit<ZodOptional<ZodArray<Type>>, OptionalOrNullable>
+  nullable(): Omit<ZodNullable<ZodArray<Type>>, OptionalOrNullable>
 }
 
 export interface ZodObject<Type extends Record<string, ZodType>> {
   type: 'object'
   fields: Type
   parse(val: unknown): InferZodObject<ZodObject<Type>>
-  optional(): Omit<ZodOptional<ZodObject<Type>>, 'optional'>
-  nullable(): Omit<ZodNullable<ZodObject<Type>>, 'nullable'>
+  optional(): Omit<ZodOptional<ZodObject<Type>>, OptionalOrNullable>
+  nullable(): Omit<ZodNullable<ZodObject<Type>>, OptionalOrNullable>
 }
 
 export type Infer<Type extends ZodType> = Type extends ZodUnknown
@@ -61,11 +63,18 @@ export type Infer<Type extends ZodType> = Type extends ZodUnknown
   : Type extends ZodNumber
   ? number
   : Type extends ZodArray<infer ElementType>
-  ? Array<Infer<ElementType>>
+  ? Array<InferElementType<ElementType>>
   : Type extends ZodObject<infer ObjectType>
   ? InferObject<ObjectType>
   : Type extends ZodOptional<infer WrappedType>
   ? Infer<WrappedType> | undefined | null
+  : never
+
+// simplifying the types to avoid the error "Type instantiation is excessively deep and possibly infinite"
+
+// Simplified type for array inference
+export type InferElementType<ElementType> = ElementType extends ZodType
+  ? Infer<ElementType>
   : never
 
 // Simplified type for object inference
