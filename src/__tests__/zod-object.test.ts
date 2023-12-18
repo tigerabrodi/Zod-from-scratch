@@ -105,5 +105,7 @@ describe('Object Schema', () => {
       .nullable()
 
     expect(personSchema.parse(null)).toBeNull()
+
+    expect(() => personSchema.parse(undefined)).toThrow('Not an object')
   })
 })
