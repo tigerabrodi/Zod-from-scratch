@@ -5,11 +5,18 @@ export type ZodType =
   | ZodArray<ZodType>
   | ZodObject<Record<string, ZodType>>
   | ZodOptional<ZodType>
+  | ZodNullable<ZodType>
 
 export interface ZodOptional<Type extends ZodType> {
   type: Type['type']
   isOptional: true
   parse(val: unknown): Infer<Type> | undefined | null
+}
+
+export interface ZodNullable<Type extends ZodType> {
+  type: Type['type']
+  isNullable: true
+  parse(val: unknown): Infer<Type> | null
 }
 
 export interface ZodUnknown {
@@ -34,6 +41,7 @@ export interface ZodArray<Type extends ZodType> {
   element: Type
   parse(val: unknown): Array<Infer<Type>>
   optional(): Omit<ZodOptional<ZodArray<Type>>, 'optional'>
+  nullable(): Omit<ZodNullable<ZodArray<Type>>, 'nullable'>
 }
 
 export interface ZodObject<Type extends Record<string, ZodType>> {

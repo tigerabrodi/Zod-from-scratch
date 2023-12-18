@@ -39,4 +39,9 @@ describe('Array Schema', () => {
     const numArray = z.array(z.number()).optional()
     expect(numArray.parse(undefined)).toEqual(undefined)
   })
+
+  it('should handle nullable arrays', () => {
+    const numArray = z.array(z.number()).nullable()
+    expect(numArray.parse(null)).toEqual(null)
+  })
 })

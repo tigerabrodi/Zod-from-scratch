@@ -19,3 +19,14 @@ export function parseOptionalArray<Type extends ZodType>(
 
   return parseArray(element, value)
 }
+
+export function parseNullableArray<Type extends ZodType>(
+  element: Type,
+  value: unknown
+): Array<Infer<Type>> | null {
+  if (value === null) {
+    return value
+  }
+
+  return parseArray(element, value)
+}

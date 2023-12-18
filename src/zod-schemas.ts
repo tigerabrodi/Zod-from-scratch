@@ -9,6 +9,7 @@ import type {
 
 import {
   parseArray,
+  parseNullableArray,
   parseNumber,
   parseObject,
   parseOptionalArray,
@@ -52,6 +53,13 @@ const array = <Type extends ZodType>(element: Type): ZodArray<Type> => ({
     element,
     isOptional: true,
     parse: (value: unknown) => parseOptionalArray(element, value),
+  }),
+
+  nullable: () => ({
+    type: 'array',
+    element,
+    isNullable: true,
+    parse: (value: unknown) => parseNullableArray(element, value),
   }),
 })
 
