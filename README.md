@@ -8,11 +8,13 @@ We'll see how far I take it.
 
 ## Todo
 
+[x] Basic types.
+
 [x] Handle nested objects and arrays.
 
 [x] Optional and nullable types.
 
-[ ] Enum Types
+[x] Enum Types
 
 [ ] Union Types
 
