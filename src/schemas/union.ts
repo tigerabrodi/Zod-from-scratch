@@ -1,4 +1,6 @@
-import type { Infer, ZodType, ZodUnion } from '../types'
+import type { ZodType, ZodUnion } from '../types'
+
+import { parseUnion } from '../parse'
 
 export const union = <Options extends Array<ZodType>>(
   options: Options
@@ -7,22 +9,3 @@ export const union = <Options extends Array<ZodType>>(
   options,
   parse: (value: unknown) => parseUnion(options, value),
 })
-
-export const parseUnion = <Options extends Array<ZodType>>(
-  options: Options,
-  value: unknown
-): Infer<Options[number]> => {
-  for (const option of options) {
-    try {
-      return option.parse(value)
-    } catch (error) {
-      // ignore error
-    }
-  }
-
-  throw new Error(
-    `Could not parse ${JSON.stringify(value)} as ${JSON.stringify(
-      options.map((option) => option.type)
-    )}`
-  )
-}
