@@ -12,6 +12,7 @@ import {
   parseNullableArray,
   parseNullableNumber,
   parseNullableObject,
+  parseNullableString,
   parseNumber,
   parseObject,
   parseOptionalArray,
@@ -28,6 +29,11 @@ const string = (): ZodString => ({
     type: 'string',
     isOptional: true,
     parse: parseOptionalString,
+  }),
+  nullable: () => ({
+    type: 'string',
+    isNullable: true,
+    parse: parseNullableString,
   }),
 })
 

@@ -28,6 +28,7 @@ export interface ZodString {
   type: 'string'
   parse(val: unknown): string
   optional(): Omit<ZodOptional<ZodString>, 'optional'>
+  nullable(): Omit<ZodNullable<ZodString>, 'nullable'>
 }
 
 export interface ZodNumber {

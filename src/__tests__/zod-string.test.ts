@@ -16,4 +16,12 @@ describe('String Schema', () => {
     expect(z.string().optional().parse(null)).toBeNull()
     expect(z.string().optional().parse('hello')).toBe('hello')
   })
+
+  it('should handle nullable strings', () => {
+    expect(z.string().nullable().parse(null)).toBeNull()
+    expect(() => z.string().nullable().parse(undefined)).toThrow(
+      'Invalid type, not a string'
+    )
+    expect(z.string().nullable().parse('hello')).toBe('hello')
+  })
 })

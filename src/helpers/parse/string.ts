@@ -10,3 +10,11 @@ export function parseOptionalString(value: unknown): string | undefined | null {
 
   return parseString(value)
 }
+
+export function parseNullableString(value: unknown): string | null {
+  if (value === null) {
+    return value
+  }
+
+  return parseString(value)
+}
