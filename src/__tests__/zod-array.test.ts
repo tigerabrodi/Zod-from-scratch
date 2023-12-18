@@ -43,5 +43,8 @@ describe('Array Schema', () => {
   it('should handle nullable arrays', () => {
     const numArray = z.array(z.number()).nullable()
     expect(numArray.parse(null)).toBeNull()
+    expect(() => numArray.parse('not an array')).toThrow(
+      'Invalid type, not an array'
+    )
   })
 })
