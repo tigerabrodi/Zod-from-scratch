@@ -10,7 +10,7 @@ We'll see how far I take it.
 
 [x] Handle nested objects and arrays.
 
-[] Optional and nullable types.
+[x] Optional and nullable types.
 
 [] Performance optimization.
 
