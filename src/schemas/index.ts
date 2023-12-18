@@ -12,4 +12,4 @@ export const z = {
   array,
   object,
   enum: Enum,
-}
+} as const
