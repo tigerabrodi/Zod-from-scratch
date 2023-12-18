@@ -20,8 +20,6 @@ We'll see how far I take it.
 
 [ ] Discriminated Union
 
-[ ] Custom validation functions
-
 # Demo
 
 coming soon
