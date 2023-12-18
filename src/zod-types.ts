@@ -55,11 +55,17 @@ export type Infer<Type extends ZodType> = Type extends ZodUnknown
   ? number
   : Type extends ZodArray<infer ElementType>
   ? Array<Infer<ElementType>>
-  : Type extends ZodObject<Record<string, ZodType>>
-  ? InferZodObject<Type>
-  : 'invalid type'
+  : Type extends ZodObject<infer ObjectType>
+  ? InferObject<ObjectType>
+  : Type extends ZodOptional<infer WrappedType>
+  ? Infer<WrappedType> | undefined | null
+  : never
 
-export type InferZodObject<Type extends ZodObject<Record<string, ZodType>>> = {
-  // keys of fields and their inferred types
-  [Key in keyof Type['fields']]: Infer<Type['fields'][Key]>
+// Simplified type for object inference
+export type InferObject<ObjectType extends Record<string, ZodType>> = {
+  [Key in keyof ObjectType]: Infer<ObjectType[Key]>
 }
+
+// Simplified type for InferZodObject
+export type InferZodObject<Type extends ZodObject<Record<string, ZodType>>> =
+  InferObject<Type['fields']>
