@@ -29,3 +29,14 @@ export const parseOptionalUnion = <Options extends Array<ZodType>>(
 
   return parseUnion(options, value)
 }
+
+export const parseNullableUnion = <Options extends Array<ZodType>>(
+  options: Options,
+  value: unknown
+): Infer<Options[number]> | null => {
+  if (value === null) {
+    return null
+  }
+
+  return parseUnion(options, value)
+}

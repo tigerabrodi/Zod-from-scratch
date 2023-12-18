@@ -25,4 +25,14 @@ describe('Union Schema', () => {
       `Could not parse null as ["string","number"]`
     )
   })
+
+  it('should validate a nullable union', () => {
+    const schema = z.union([z.string(), z.number()]).nullable()
+    expect(schema.parse(null)).toBeNull()
+    expect(schema.parse('hello')).toBe('hello')
+    expect(schema.parse(123)).toBe(123)
+    expect(() => schema.parse(undefined)).toThrow(
+      `Could not parse undefined as ["string","number"]`
+    )
+  })
 })
