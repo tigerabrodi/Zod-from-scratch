@@ -10,3 +10,11 @@ export function parseOptionalNumber(value: unknown): number | undefined | null {
 
   return parseNumber(value)
 }
+
+export function parseNullableNumber(value: unknown): number | null {
+  if (value === null) {
+    return value
+  }
+
+  return parseNumber(value)
+}

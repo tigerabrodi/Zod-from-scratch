@@ -10,6 +10,7 @@ import type {
 import {
   parseArray,
   parseNullableArray,
+  parseNullableNumber,
   parseNumber,
   parseObject,
   parseOptionalArray,
@@ -36,6 +37,11 @@ const number = (): ZodNumber => ({
     type: 'number',
     isOptional: true,
     parse: parseOptionalNumber,
+  }),
+  nullable: () => ({
+    type: 'number',
+    isNullable: true,
+    parse: parseNullableNumber,
   }),
 })
 

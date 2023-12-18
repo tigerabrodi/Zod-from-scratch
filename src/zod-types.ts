@@ -34,6 +34,7 @@ export interface ZodNumber {
   type: 'number'
   parse(val: unknown): number
   optional(): Omit<ZodOptional<ZodNumber>, 'optional'>
+  nullable(): Omit<ZodNullable<ZodNumber>, 'nullable'>
 }
 
 export interface ZodArray<Type extends ZodType> {
