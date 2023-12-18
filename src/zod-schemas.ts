@@ -18,6 +18,7 @@ import {
   parseNumber,
   parseObject,
   parseOptionalArray,
+  parseOptionalEnum,
   parseOptionalNumber,
   parseOptionalObject,
   parseOptionalString,
@@ -102,6 +103,12 @@ const Enum = <Enum extends Array<string>>(values: Enum): ZodEnum<Enum> => ({
   type: 'enum',
   values,
   parse: (value: unknown) => parseEnum(values, value),
+  optional: () => ({
+    type: 'enum',
+    isOptional: true,
+    values,
+    parse: (value: unknown) => parseOptionalEnum(values, value),
+  }),
 })
 
 export const z = {

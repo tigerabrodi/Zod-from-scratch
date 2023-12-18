@@ -19,4 +19,11 @@ describe('Enum Schema', () => {
     const enumSchema = z.enum(['a', 'b', 'c'])
     expect(() => enumSchema.parse(1)).toThrow('Expected a string, got 1')
   })
+
+  it('should handle optional enums', () => {
+    const enumSchema = z.enum(['a', 'b', 'c']).optional()
+    expect(enumSchema.parse('a')).toEqual('a')
+    expect(enumSchema.parse(undefined)).toEqual(undefined)
+    expect(enumSchema.parse(null)).toEqual(null)
+  })
 })

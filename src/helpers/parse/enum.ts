@@ -12,3 +12,14 @@ export function parseEnum<Enum extends Array<string>>(
 
   return value as Enum[number]
 }
+
+export function parseOptionalEnum<Enum extends Array<string>>(
+  values: Enum,
+  value: unknown
+): Enum[number] | undefined | null {
+  if (value === undefined || value === null) {
+    return value
+  }
+
+  return parseEnum(values, value)
+}

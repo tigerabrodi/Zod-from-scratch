@@ -27,7 +27,7 @@ export interface ZodEnum<Enum extends Array<string>> {
   type: 'enum'
   values: Enum
   parse(val: unknown): Enum[number]
-  // optional(): Omit<ZodOptional<ZodEnum<Enum>>, OptionalOrNullable>
+  optional(): Omit<ZodOptional<ZodEnum<Enum>>, OptionalOrNullable>
   // nullable(): Omit<ZodNullable<ZodEnum<Enum>>, OptionalOrNullable>
 }
 
@@ -74,6 +74,8 @@ export type Infer<Type extends ZodType> = Type extends ZodUnknown
   ? number
   : Type extends ZodArray<infer ElementType>
   ? Array<InferElementType<ElementType>>
+  : Type extends ZodEnum<infer EnumType>
+  ? EnumType[number]
   : Type extends ZodObject<infer ObjectType>
   ? InferObject<ObjectType>
   : Type extends ZodOptional<infer WrappedType>
