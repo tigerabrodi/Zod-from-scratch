@@ -1,6 +1,6 @@
 import { it, describe, expect } from 'vitest'
 
-import { z } from '../zod-schemas'
+import { z } from '../schemas'
 
 describe('Enum Schema', () => {
   it('should validate an enum', () => {

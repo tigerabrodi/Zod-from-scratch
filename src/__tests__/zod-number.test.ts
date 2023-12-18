@@ -1,6 +1,6 @@
 import { it, describe, expect } from 'vitest'
 
-import { z } from '../zod-schemas'
+import { z } from '../schemas'
 
 describe('Number Schema', () => {
   it('should validate a number', () => {
