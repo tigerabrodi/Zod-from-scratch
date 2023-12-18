@@ -18,3 +18,14 @@ export const parseUnion = <Options extends Array<ZodType>>(
     )}`
   )
 }
+
+export const parseOptionalUnion = <Options extends Array<ZodType>>(
+  options: Options,
+  value: unknown
+): Infer<Options[number]> | undefined => {
+  if (value === undefined) {
+    return undefined
+  }
+
+  return parseUnion(options, value)
+}

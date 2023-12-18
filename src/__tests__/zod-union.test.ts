@@ -15,4 +15,14 @@ describe('Union Schema', () => {
       'Could not parse true as ["string","number"]'
     )
   })
+
+  it('should validate an optional union', () => {
+    const schema = z.union([z.string(), z.number()]).optional()
+    expect(schema.parse(undefined)).toBe(undefined)
+    expect(schema.parse('hello')).toBe('hello')
+    expect(schema.parse(123)).toBe(123)
+    expect(() => schema.parse(null)).toThrow(
+      `Could not parse null as ["string","number"]`
+    )
+  })
 })

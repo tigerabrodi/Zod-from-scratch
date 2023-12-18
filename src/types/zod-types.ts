@@ -72,7 +72,6 @@ export interface ZodUnion<Union extends Array<ZodType>> {
   type: 'union'
   options: Union
   parse(val: unknown): Infer<Union[number]>
-
-  // optional(): Omit<ZodOptional<ZodUnion<Union>>, OptionalOrNullable>
+  optional(): Omit<ZodOptional<ZodUnion<Union>>, OptionalOrNullable>
   // nullable(): Omit<ZodNullable<ZodUnion<Union>>, OptionalOrNullable>
 }

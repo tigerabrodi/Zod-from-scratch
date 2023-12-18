@@ -1,6 +1,6 @@
 import type { ZodType, ZodUnion } from '../types'
 
-import { parseUnion } from '../parse'
+import { parseOptionalUnion, parseUnion } from '../parse'
 
 export const union = <Options extends Array<ZodType>>(
   options: Options
@@ -8,4 +8,10 @@ export const union = <Options extends Array<ZodType>>(
   type: 'union',
   options,
   parse: (value: unknown) => parseUnion(options, value),
+  optional: () => ({
+    type: 'union',
+    isOptional: true,
+    options,
+    parse: (value: unknown) => parseOptionalUnion(options, value),
+  }),
 })
