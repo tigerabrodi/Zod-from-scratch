@@ -12,7 +12,13 @@ We'll see how far I take it.
 
 [x] Optional and nullable types.
 
-[] Performance optimization.
+[ ] Enum Types
+
+[ ] Union Types
+
+[ ] Discriminated Union
+
+[ ] Custom validation functions
 
 # Demo
 
