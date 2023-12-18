@@ -78,6 +78,7 @@ const object = <Type extends Record<string, ZodType>>(
   optional: () => ({
     type: 'object',
     fields,
+    isOptional: true,
     parse: (value: unknown) => parseOptionalObject(fields, value),
   }),
 })
