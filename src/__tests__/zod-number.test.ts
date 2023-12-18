@@ -19,7 +19,10 @@ describe('Number Schema', () => {
     expect(z.number().optional().parse(123)).toBe(123)
   })
 
-  it.only('should handle nullable numbers', () => {
+  it('should handle nullable numbers', () => {
     expect(z.number().nullable().parse(null)).toBeNull()
+    expect(() => z.number().nullable().parse(undefined)).toThrow(
+      'Invalid type, not a number'
+    )
   })
 })
