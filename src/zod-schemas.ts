@@ -12,6 +12,7 @@ import {
   parseArray,
   parseEnum,
   parseNullableArray,
+  parseNullableEnum,
   parseNullableNumber,
   parseNullableObject,
   parseNullableString,
@@ -108,6 +109,12 @@ const Enum = <Enum extends Array<string>>(values: Enum): ZodEnum<Enum> => ({
     isOptional: true,
     values,
     parse: (value: unknown) => parseOptionalEnum(values, value),
+  }),
+  nullable: () => ({
+    type: 'enum',
+    isNullable: true,
+    values,
+    parse: (value: unknown) => parseNullableEnum(values, value),
   }),
 })
 

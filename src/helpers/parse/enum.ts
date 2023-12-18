@@ -23,3 +23,14 @@ export function parseOptionalEnum<Enum extends Array<string>>(
 
   return parseEnum(values, value)
 }
+
+export function parseNullableEnum<Enum extends Array<string>>(
+  values: Enum,
+  value: unknown
+): Enum[number] | null {
+  if (value === null) {
+    return value
+  }
+
+  return parseEnum(values, value)
+}

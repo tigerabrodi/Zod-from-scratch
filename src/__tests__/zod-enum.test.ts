@@ -26,4 +26,13 @@ describe('Enum Schema', () => {
     expect(enumSchema.parse(undefined)).toEqual(undefined)
     expect(() => enumSchema.parse(null)).toThrow('Expected a string, got null')
   })
+
+  it('should handle nullable enums', () => {
+    const enumSchema = z.enum(['a', 'b', 'c']).nullable()
+    expect(enumSchema.parse('a')).toEqual('a')
+    expect(enumSchema.parse(null)).toEqual(null)
+    expect(() => enumSchema.parse(undefined)).toThrow(
+      'Expected a string, got undefined'
+    )
+  })
 })

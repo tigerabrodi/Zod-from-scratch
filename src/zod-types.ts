@@ -27,7 +27,7 @@ export interface ZodEnum<Enum extends Array<string>> {
   values: Enum
   parse(val: unknown): Enum[number]
   optional(): Omit<ZodOptional<ZodEnum<Enum>>, OptionalOrNullable>
-  // nullable(): Omit<ZodNullable<ZodEnum<Enum>>, OptionalOrNullable>
+  nullable(): Omit<ZodNullable<ZodEnum<Enum>>, OptionalOrNullable>
 }
 
 export interface ZodUnknown {
