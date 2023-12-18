@@ -6,6 +6,7 @@ export type ZodType =
   | ZodObject<Record<string, ZodType>>
   | ZodOptional<ZodType>
   | ZodNullable<ZodType>
+  | ZodEnum<Array<string>>
 
 type OptionalOrNullable = 'optional' | 'nullable'
 
@@ -19,6 +20,15 @@ export interface ZodNullable<Type extends ZodType> {
   type: Type['type']
   isNullable: true
   parse(val: unknown): Infer<Type> | null
+}
+
+// enum is an array of strings, when inferring the type we want to return a union of the string in typescript
+export interface ZodEnum<Enum extends Array<string>> {
+  type: 'enum'
+  values: Enum
+  parse(val: unknown): Enum[number]
+  // optional(): Omit<ZodOptional<ZodEnum<Enum>>, OptionalOrNullable>
+  // nullable(): Omit<ZodNullable<ZodEnum<Enum>>, OptionalOrNullable>
 }
 
 export interface ZodUnknown {

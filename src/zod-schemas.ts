@@ -1,5 +1,6 @@
 import type {
   ZodArray,
+  ZodEnum,
   ZodNumber,
   ZodObject,
   ZodString,
@@ -9,6 +10,7 @@ import type {
 
 import {
   parseArray,
+  parseEnum,
   parseNullableArray,
   parseNullableNumber,
   parseNullableObject,
@@ -96,10 +98,17 @@ const object = <Type extends Record<string, ZodType>>(
   }),
 })
 
+const Enum = <Enum extends Array<string>>(values: Enum): ZodEnum<Enum> => ({
+  type: 'enum',
+  values,
+  parse: (value: unknown) => parseEnum(values, value),
+})
+
 export const z = {
   string,
   number,
   unknown,
   array,
   object,
+  enum: Enum,
 }
