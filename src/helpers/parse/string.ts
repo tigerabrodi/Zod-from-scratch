@@ -3,8 +3,8 @@ export function parseString(value: unknown): string {
   return value
 }
 
-export function parseOptionalString(value: unknown): string | undefined | null {
-  if (value === undefined || value === null) {
+export function parseOptionalString(value: unknown): string | undefined {
+  if (value === undefined) {
     return value
   }
 

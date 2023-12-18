@@ -16,8 +16,8 @@ export function parseEnum<Enum extends Array<string>>(
 export function parseOptionalEnum<Enum extends Array<string>>(
   values: Enum,
   value: unknown
-): Enum[number] | undefined | null {
-  if (value === undefined || value === null) {
+): Enum[number] | undefined {
+  if (value === undefined) {
     return value
   }
 

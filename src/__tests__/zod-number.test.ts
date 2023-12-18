@@ -15,8 +15,11 @@ describe('Number Schema', () => {
 
   it('should handle optional numbers', () => {
     expect(z.number().optional().parse(undefined)).toBeUndefined()
-    expect(z.number().optional().parse(null)).toBeNull()
     expect(z.number().optional().parse(123)).toBe(123)
+
+    expect(() => z.number().optional().parse(null)).toThrow(
+      'Invalid type, not a number'
+    )
   })
 
   it('should handle nullable numbers', () => {

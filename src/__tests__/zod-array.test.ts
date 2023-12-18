@@ -38,6 +38,7 @@ describe('Array Schema', () => {
   it('should handle optional arrays', () => {
     const numArray = z.array(z.number()).optional()
     expect(numArray.parse(undefined)).toEqual(undefined)
+    expect(() => numArray.parse(null)).toThrow('Invalid type, not an array')
   })
 
   it('should handle nullable arrays', () => {

@@ -13,8 +13,11 @@ describe('String Schema', () => {
 
   it('should handle optional strings', () => {
     expect(z.string().optional().parse(undefined)).toBeUndefined()
-    expect(z.string().optional().parse(null)).toBeNull()
     expect(z.string().optional().parse('hello')).toBe('hello')
+
+    expect(() => z.string().optional().parse(null)).toThrow(
+      'Invalid type, not a string'
+    )
   })
 
   it('should handle nullable strings', () => {

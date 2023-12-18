@@ -13,7 +13,7 @@ type OptionalOrNullable = 'optional' | 'nullable'
 export interface ZodOptional<Type extends ZodType> {
   type: Type['type']
   isOptional: true
-  parse(val: unknown): Infer<Type> | undefined | null
+  parse(val: unknown): Infer<Type> | undefined
 }
 
 export interface ZodNullable<Type extends ZodType> {
@@ -22,7 +22,6 @@ export interface ZodNullable<Type extends ZodType> {
   parse(val: unknown): Infer<Type> | null
 }
 
-// enum is an array of strings, when inferring the type we want to return a union of the string in typescript
 export interface ZodEnum<Enum extends Array<string>> {
   type: 'enum'
   values: Enum

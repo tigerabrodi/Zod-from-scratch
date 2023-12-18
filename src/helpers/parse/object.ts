@@ -29,8 +29,8 @@ export function parseObject<Type extends Record<string, ZodType>>(
 export function parseOptionalObject<Type extends Record<string, ZodType>>(
   fields: Type,
   value: unknown
-): InferZodObject<ZodObject<Type>> | undefined | null {
-  if (value === undefined || value === null) {
+): InferZodObject<ZodObject<Type>> | undefined {
+  if (value === undefined) {
     return value
   }
 

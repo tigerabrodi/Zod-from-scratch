@@ -77,6 +77,8 @@ describe('Object Schema', () => {
       .optional()
 
     expect(personSchema.parse(undefined)).toBeUndefined()
+
+    expect(() => personSchema.parse(null)).toThrow('Not an object')
   })
 
   it('should handle optional fields', () => {

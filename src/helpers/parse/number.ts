@@ -3,8 +3,8 @@ export function parseNumber(value: unknown): number {
   return value
 }
 
-export function parseOptionalNumber(value: unknown): number | undefined | null {
-  if (value === undefined || value === null) {
+export function parseOptionalNumber(value: unknown): number | undefined {
+  if (value === undefined) {
     return value
   }
 

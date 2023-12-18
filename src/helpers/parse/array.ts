@@ -12,8 +12,8 @@ export function parseArray<Type extends ZodType>(
 export function parseOptionalArray<Type extends ZodType>(
   element: Type,
   value: unknown
-): Array<InferElementType<Type>> | undefined | null {
-  if (value === undefined || value === null) {
+): Array<InferElementType<Type>> | undefined {
+  if (value === undefined) {
     return value
   }
 
