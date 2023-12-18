@@ -49,11 +49,8 @@ export interface ZodObject<Type extends Record<string, ZodType>> {
   type: 'object'
   fields: Type
   parse(val: unknown): InferZodObject<ZodObject<Type>>
-  optional(): {
-    type: 'object'
-    fields: Type
-    parse(val: unknown): InferZodObject<ZodObject<Type>> | undefined | null
-  }
+  optional(): Omit<ZodOptional<ZodObject<Type>>, 'optional'>
+  nullable(): Omit<ZodNullable<ZodObject<Type>>, 'nullable'>
 }
 
 export type Infer<Type extends ZodType> = Type extends ZodUnknown

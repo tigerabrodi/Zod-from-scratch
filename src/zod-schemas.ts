@@ -11,6 +11,7 @@ import {
   parseArray,
   parseNullableArray,
   parseNullableNumber,
+  parseNullableObject,
   parseNumber,
   parseObject,
   parseOptionalArray,
@@ -80,6 +81,12 @@ const object = <Type extends Record<string, ZodType>>(
     fields,
     isOptional: true,
     parse: (value: unknown) => parseOptionalObject(fields, value),
+  }),
+  nullable: () => ({
+    type: 'object',
+    fields,
+    isNullable: true,
+    parse: (value: unknown) => parseNullableObject(fields, value),
   }),
 })
 

@@ -95,4 +95,15 @@ describe('Object Schema', () => {
       name: 'Alice',
     })
   })
+
+  it('should handle nullable objects', () => {
+    const personSchema = z
+      .object({
+        name: z.string(),
+        age: z.number(),
+      })
+      .nullable()
+
+    expect(personSchema.parse(null)).toBeNull()
+  })
 })

@@ -36,3 +36,14 @@ export function parseOptionalObject<Type extends Record<string, ZodType>>(
 
   return parseObject(fields, value)
 }
+
+export function parseNullableObject<Type extends Record<string, ZodType>>(
+  fields: Type,
+  value: unknown
+): InferZodObject<ZodObject<Type>> | null {
+  if (value === null) {
+    return value
+  }
+
+  return parseObject(fields, value)
+}
