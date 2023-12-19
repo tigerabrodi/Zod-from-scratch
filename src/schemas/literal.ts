@@ -1,6 +1,6 @@
 import type { ZodLiteral } from '../types'
 
-import { parseLiteral } from '../parse'
+import { parseLiteral, parseOptionalLiteral } from '../parse'
 
 export const literal = <Literal extends string | number | boolean>(
   literal: Literal
@@ -8,4 +8,10 @@ export const literal = <Literal extends string | number | boolean>(
   type: 'literal',
   value: literal,
   parse: (value: unknown) => parseLiteral(value, literal),
+  optional: () => ({
+    isOptional: true,
+    type: 'literal',
+    value: literal,
+    parse: (value: unknown) => parseOptionalLiteral(value, literal),
+  }),
 })

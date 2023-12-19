@@ -8,3 +8,14 @@ export const parseLiteral = <Literal extends string | number | boolean>(
 
   return value as Literal
 }
+
+export const parseOptionalLiteral = <Literal extends string | number | boolean>(
+  value: unknown,
+  literal: Literal
+): Literal | undefined => {
+  if (value === undefined) {
+    return undefined
+  }
+
+  return parseLiteral(value, literal)
+}
