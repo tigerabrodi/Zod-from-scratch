@@ -29,4 +29,13 @@ describe('Zod literal Schema', () => {
       'Expected true but got false'
     )
   })
+
+  it('should handle optional literals', () => {
+    const optionalLiteralSchema = z.literal('a').optional()
+    expect(optionalLiteralSchema.parse(undefined)).toBe(undefined)
+    expect(optionalLiteralSchema.parse('a')).toBe('a')
+    expect(() => optionalLiteralSchema.parse(null)).toThrow(
+      'Expected a but got null'
+    )
+  })
 })
