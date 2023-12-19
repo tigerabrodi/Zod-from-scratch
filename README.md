@@ -44,6 +44,55 @@ What you'd have to keep in mind:
 - Break down types to smaller types, simplifying it for TypeScript
 - Compose types
 
+## Interfaces are lazy, Types are eager
+
+Why mix interfaces and types, and not simply stick with types?
+
+I'm a fan of sticking with types for consistency. However, here interfaces are a necessity.
+
+No, it is not because of declaration merging that interfaces offer.
+
+### Types -> eager evaluation
+
+When TypeScript encounters a type alias (type), it tries to resolve it immediately. This means the type is fully expanded as soon as it's defined. "Fully expanded" is like giving your friend all the pieces of the puzzle at once. TypeScript immediately tries to see the whole picture (the entire structure of the type) as soon as you define it.
+
+This can lead to issues with recursive types because TypeScript will keep trying to resolve them endlessly, leading to circular reference errors.
+
+### Interfaces -> lazy evaluation
+
+Interfaces in TypeScript are lazily evaluated. This means they are not fully expanded until they are actually used. This lazy behavior allows TypeScript to handle recursive structures more gracefully, as it doesn't try to expand them immediately upon definition.
+
+### Example
+
+Using type, this would result in the error `Type alias 'BoxedString' circularly references itself.`:
+
+```ts
+type Boxed<T> = { value: T }
+
+type BoxedString = Boxed<BoxedString> | string
+```
+
+Using interface, no errors!
+
+```ts
+interface Boxed<T> {
+  value: T
+}
+
+type BoxedString = Boxed<BoxedString> | string
+```
+
+### Use case
+
+If you're building libraries, sticking to interfaces is ideal:
+
+- Declaration merging is useful if someone wants to extend the definitions of your library.
+- You will likely deal with recursive structures (depends on the complexity)
+
+You will still use type aliases where interfaces aren't possible such as union types.
+
+If you're not building a library, then simply stick to type aliases. Till you encounter the circular error I guess lol
+
 ## Discriminated Union Type
 
 This is a bit tricky to understand.
