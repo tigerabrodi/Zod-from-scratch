@@ -19,6 +19,22 @@ describe('Discriminated union Schema', () => {
     expect(() => union.parse(1)).toThrow('Value must be an object')
   })
 
+  it('throws an error if value is undefined or null', () => {
+    const union = z.discriminatedUnion('type', [
+      z.object({
+        type: z.literal('a'),
+        lol: z.number(),
+      }),
+      z.object({
+        type: z.literal('b'),
+        lmao: z.string(),
+      }),
+    ])
+
+    expect(() => union.parse(undefined)).toThrow('Value must be an object')
+    expect(() => union.parse(null)).toThrow('Value must be an object')
+  })
+
   //   it('should validate a discriminated union schema', () => {
   // 	    const union = z.discriminatedUnion('type', [
   //       z.object({
