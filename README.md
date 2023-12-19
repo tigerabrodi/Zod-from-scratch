@@ -28,6 +28,18 @@ Install deps `npm i`.
 
 Run test `npm test`.
 
+## Testing
+
+Built it with TDD.
+
+1. Failing test.
+2. Make test pass.
+3. Refactor.
+
+It was a fun experience, such dopamine!
+
+Plus much easier than feeling overwhelmed by all the code you need to write.
+
 ## Buggy
 
 You may come across `Type instantiation is excessively deep and possibly infinite.`.
