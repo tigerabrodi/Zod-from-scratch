@@ -18,6 +18,8 @@ We'll see how far I take it.
 
 [x] Union Types
 
+[ ] Literal strings
+
 [ ] Discriminated Union
 
 # Demo
