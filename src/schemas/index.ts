@@ -1,5 +1,6 @@
 import { array } from './array'
 import { Enum } from './enum'
+import { literal } from './literal'
 import { number } from './number'
 import { object } from './object'
 import { string } from './string'
@@ -14,4 +15,5 @@ export const z = {
   object,
   union,
   enum: Enum,
+  literal,
 } as const

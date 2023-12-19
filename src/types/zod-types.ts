@@ -10,6 +10,7 @@ export type ZodType =
   | ZodNullable<ZodType>
   | ZodEnum<Array<string>>
   | ZodUnion<Array<ZodType>>
+  | ZodLiteral<string | number | boolean>
 
 type OptionalOrNullable = 'optional' | 'nullable'
 
@@ -74,4 +75,10 @@ export interface ZodUnion<Union extends Array<ZodType>> {
   parse(val: unknown): Infer<Union[number]>
   optional(): Omit<ZodOptional<ZodUnion<Union>>, OptionalOrNullable>
   nullable(): Omit<ZodNullable<ZodUnion<Union>>, OptionalOrNullable>
+}
+
+export interface ZodLiteral<Literal extends string | number | boolean> {
+  type: 'literal'
+  value: Literal
+  parse(val: unknown): Literal
 }
