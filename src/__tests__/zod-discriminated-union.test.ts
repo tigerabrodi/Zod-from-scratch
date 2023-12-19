@@ -94,19 +94,39 @@ describe('Discriminated union Schema', () => {
     )
   })
 
-  //   it('should validate a discriminated union schema', () => {
-  // 	    const union = z.discriminatedUnion('type', [
-  //       z.object({
-  // 	type: z.literal('a'),
-  // 	a: z.number(),
-  //       }),
-  //       z.object({
-  // 	type: z.literal('b'),
-  // 	b: z.string(),
-  //       }),
-  //     ])
+  it('should validate a discriminated union schema', () => {
+    const union = z.discriminatedUnion('type', [
+      z.object({
+        type: z.literal('a'),
+        a: z.number(),
+      }),
+      z.object({
+        type: z.literal('b'),
+        b: z.string(),
+      }),
+    ])
 
-  //     expect(union.parse({ type: 'a', a: 1 })).toEqual({ type: 'a', a: 1 })
-  //     expect(union.parse({ type: 'b', b: '1' })).toEqual({ type: 'b', b: '1' })
-  //   })
+    expect(union.parse({ type: 'a', a: 1 })).toEqual({ type: 'a', a: 1 })
+    expect(union.parse({ type: 'b', b: '1' })).toEqual({ type: 'b', b: '1' })
+  })
+
+  it('should throw an error if a field fails to parse', () => {
+    const union = z.discriminatedUnion('type', [
+      z.object({
+        type: z.literal('a'),
+        a: z.number(),
+      }),
+      z.object({
+        type: z.literal('b'),
+        b: z.string(),
+      }),
+    ])
+
+    expect(() => union.parse({ type: 'a', a: '1' })).toThrow(
+      `Value's key "a" failed to parse: number`
+    )
+    expect(() => union.parse({ type: 'b', b: 1 })).toThrow(
+      `Value's key "b" failed to parse: string`
+    )
+  })
 })
