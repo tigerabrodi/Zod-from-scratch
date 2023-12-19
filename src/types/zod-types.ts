@@ -11,6 +11,14 @@ export type ZodType =
   | ZodEnum<Array<string>>
   | ZodUnion<Array<ZodType>>
   | ZodLiteral<string | number | boolean>
+  | ZodDiscriminatedUnion<
+      string,
+      Array<
+        ZodObject<
+          { [K in string]: ZodLiteral<string> } & Record<string, ZodType>
+        >
+      >
+    >
 
 type OptionalOrNullable = 'optional' | 'nullable'
 
@@ -83,4 +91,23 @@ export interface ZodLiteral<Literal extends string | number | boolean> {
   parse(val: unknown): Literal
   optional(): Omit<ZodOptional<ZodLiteral<Literal>>, OptionalOrNullable>
   nullable(): Omit<ZodNullable<ZodLiteral<Literal>>, OptionalOrNullable>
+}
+
+export type DiscriminatedUnionOption<
+  Discriminator extends string,
+  DiscriminatorType extends ZodLiteral<string>
+> = {
+  [K in Discriminator]: DiscriminatorType
+} & Record<string, ZodType>
+
+export interface ZodDiscriminatedUnion<
+  Discriminator extends string,
+  Union extends Array<
+    ZodObject<DiscriminatedUnionOption<Discriminator, ZodLiteral<string>>>
+  >
+> {
+  type: 'discriminated-union'
+  discriminator: Discriminator
+  options: Union
+  parse(val: unknown): Infer<Union[number]>
 }

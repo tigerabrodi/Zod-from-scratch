@@ -1,4 +1,5 @@
 import { array } from './array'
+import { discriminatedUnion } from './discriminated-union'
 import { Enum } from './enum'
 import { literal } from './literal'
 import { number } from './number'
@@ -16,4 +17,5 @@ export const z = {
   union,
   enum: Enum,
   literal,
+  discriminatedUnion,
 } as const
