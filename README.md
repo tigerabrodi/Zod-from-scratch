@@ -16,7 +16,7 @@ We'll see how far I take it.
 
 [x] Enum Types
 
-[ ] Union Types
+[x] Union Types
 
 [ ] Discriminated Union
 
