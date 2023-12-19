@@ -82,4 +82,5 @@ export interface ZodLiteral<Literal extends string | number | boolean> {
   value: Literal
   parse(val: unknown): Literal
   optional(): Omit<ZodOptional<ZodLiteral<Literal>>, OptionalOrNullable>
+  nullable(): Omit<ZodNullable<ZodLiteral<Literal>>, OptionalOrNullable>
 }

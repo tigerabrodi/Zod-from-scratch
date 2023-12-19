@@ -38,4 +38,13 @@ describe('Zod literal Schema', () => {
       'Expected a but got null'
     )
   })
+
+  it('should handle nullable literals', () => {
+    const nullableLiteralSchema = z.literal('a').nullable()
+    expect(nullableLiteralSchema.parse(null)).toBe(null)
+    expect(nullableLiteralSchema.parse('a')).toBe('a')
+    expect(() => nullableLiteralSchema.parse(undefined)).toThrow(
+      'Expected a but got undefined'
+    )
+  })
 })

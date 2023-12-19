@@ -19,3 +19,14 @@ export const parseOptionalLiteral = <Literal extends string | number | boolean>(
 
   return parseLiteral(value, literal)
 }
+
+export const parseNullableLiteral = <Literal extends string | number | boolean>(
+  value: unknown,
+  literal: Literal
+): Literal | null => {
+  if (value === null) {
+    return null
+  }
+
+  return parseLiteral(value, literal)
+}
