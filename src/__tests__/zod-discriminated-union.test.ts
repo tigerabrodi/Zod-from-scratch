@@ -54,6 +54,46 @@ describe('Discriminated union Schema', () => {
     ).toThrow('Value does not have the key "type"')
   })
 
+  it('throws an error if value is object, has the key, but the value of the key is not a string', () => {
+    const union = z.discriminatedUnion('type', [
+      z.object({
+        type: z.literal('a'),
+        lol: z.number(),
+      }),
+      z.object({
+        type: z.literal('b'),
+        lmao: z.string(),
+      }),
+    ])
+
+    expect(() =>
+      union.parse({
+        type: 1,
+      })
+    ).toThrow(`Value's key type is not a string`)
+  })
+
+  it("throws error if key's value is a string, but it does not match any of the options", () => {
+    const union = z.discriminatedUnion('type', [
+      z.object({
+        type: z.literal('a'),
+        lol: z.number(),
+      }),
+      z.object({
+        type: z.literal('b'),
+        lmao: z.string(),
+      }),
+    ])
+
+    expect(() =>
+      union.parse({
+        type: 'c',
+      })
+    ).toThrow(
+      `Value's key type is a string, but it does not match any of the options`
+    )
+  })
+
   //   it('should validate a discriminated union schema', () => {
   // 	    const union = z.discriminatedUnion('type', [
   //       z.object({

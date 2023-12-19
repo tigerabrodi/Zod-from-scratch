@@ -1,6 +1,5 @@
 import type {
   DiscriminatedUnionOption,
-  Infer,
   ZodDiscriminatedUnion,
   ZodLiteral,
   ZodObject,
