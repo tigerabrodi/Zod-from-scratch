@@ -2,23 +2,21 @@
 
 Building Zod from scratch to learn how it works under the hood.
 
-Started as a conversation with a friend to wait wtf how does it actually work? :joy:
+I started because I love using Zod and got curious about how it works.
 
-Doing it with TDD. :smile:
-
-We'll see how far I take it lmao.
+Doing it with TDD. 😄 🔥
 
 ## Todo
 
-Overall made some good progress.
+Overall made some good progress. 🚀
 
-[x] Basic types.
-[x] Handle nested objects and arrays.
-[x] Optional and nullable types.
-[x] Enum Types
-[x] Union Types
-[x] Literal strings
-[x] Discriminated Union
+- [x] Basic types.
+- [x] Handle nested objects and arrays.
+- [x] Optional and nullable types.
+- [x] Enum Types
+- [x] Union Types
+- [x] Literal strings
+- [x] Discriminated Union
 
 ## Run it locally
 
@@ -30,7 +28,7 @@ Run test `npm test`.
 
 ## Testing
 
-Built it with TDD.
+Built it with TDD. 💞
 
 1. Failing test.
 2. Make test pass.
@@ -40,7 +38,7 @@ It was a fun experience, such dopamine!
 
 Plus much easier than feeling overwhelmed by all the code you need to write.
 
-## Buggy
+## Buggy 😅
 
 You may come across `Type instantiation is excessively deep and possibly infinite.`.
 
@@ -56,7 +54,7 @@ What you'd have to keep in mind:
 - Break down types to smaller types, simplifying it for TypeScript
 - Compose types
 
-## Interfaces are lazy, Types are eager
+## Interfaces are lazy, Types are eager 😱
 
 Why mix interfaces and types, and not simply stick with types?
 
